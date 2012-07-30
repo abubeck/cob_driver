@@ -194,14 +194,14 @@ public:
 
 	bool srvCallback_Stop(cob_srvs::Trigger::Request &req, cob_srvs::Trigger::Response &res)
   	{
-		ROS_INFO("Stopping powercubes...");
+		ROS_INFO("Stopping trajectory controller.");
 
 		// stop trajectory controller
 		executing_ = false;
 		res.success.data = true;
-		ROS_INFO("...stopping cob_trajectory_controller.");
 		traj_generator_->isMoving = false;
 		//as_.setPreemted();
+		failure_ = true;
 		return true;
   	}
     bool srvCallback_setVel(cob_trajectory_controller::SetFloat::Request &req, cob_trajectory_controller::SetFloat::Response &res)
@@ -236,7 +236,7 @@ public:
   {
     if(!executing_)
         {
-           //set arm to velocity mode
+           //set component to velocity mode
           cob_srvs::SetOperationMode opmode;
           opmode.request.operation_mode.data = "velocity";
           srvClient_SetOperationMode.call(opmode);
