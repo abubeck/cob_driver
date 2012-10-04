@@ -120,7 +120,7 @@ public:
 	{
 		data.out_pub_em_stop_state_.run_stop = true;
 		//for cob the wireless stop field is misused as laser stop field
-		data.out_pub_relayboard_state.emergency_state = 2;
+		data.out_pub_relayboard_state.emergency_state = 0;
 		if(scanner_stop_State == 1)
                 	data.out_pub_em_stop_state_.wireless_stop = true;
         	else
